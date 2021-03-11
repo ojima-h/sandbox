@@ -1,11 +1,13 @@
 name: Split PR
 
-on: issue_comment
+on:
+  issue_comment:
+    types: [created]
 
 jobs:
   split-pr:
     runs-on: ubuntu-latest
-    if: ${{ github.event.issue.pull_request }}
+    if: ${{ github.event.issue.pull_request && github.event.comment.body == "/split-pr" }}
 
     steps:
       - uses: actions/checkout@v2
