@@ -20,4 +20,4 @@ jobs:
           branch-suffix: "-split"
           commit-message: "Split PR #${{ github.event.issue.number }}"
           title-prefix: "split-pr: "
-          github-token: ${{ github.token }}
+          token: ${{ github.token }}
