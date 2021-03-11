@@ -1,0 +1,21 @@
+name: Split PR
+
+on: issue_comment
+
+jobs:
+  split-pr:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.issue.pull_request }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run a one-line script
+        uses: ojima-h/split-pr@main
+        with:
+          pull-number: ${{ github.event.issue.number }}
+          file-pattern: "dir/**"
+          branch-suffix: "-split"
+          commit-message: "Split PR #${{ github.event.issue.number }}"
+          title-prefix: "split-pr: "
+          github-token: ${{ github.token }}
