@@ -24,8 +24,9 @@ jobs:
           title-prefix: "split-pr: "
           token: ${{ github.token }}
           
+
       - name: Report success
-        if: ${{ always() }}
+        if: ${{ success() }}
         uses: actions/github-script@v3
         with:
           script: |
@@ -33,9 +34,20 @@ jobs:
               owner: context.issue.owner,
               repo: context.issue.repo,
               comment_id: context.payload.comment.id,
-              content: ${{ success() }} ? "rocket" : "confused"
+              content: "rocket"
             });
-            ${{ failure() }} && github.issues.createComment({
+      - name: Report failure
+        if: ${{ failure() }}
+        uses: actions/github-script@v3
+        with:
+          script: |
+            github.reactions.createForIssueComment({
+              owner: context.issue.owner,
+              repo: context.issue.repo,
+              comment_id: context.payload.comment.id,
+              content: "confused"
+            });
+            github.issues.createComment({
               owner: context.issue.owner,
               repo: context.issue.repo,
               issue_number: context.payload.issue.number,
