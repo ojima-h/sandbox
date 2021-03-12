@@ -44,5 +44,5 @@ jobs:
               owner: context.issue.owner,
               repo: context.issue.repo,
               issue_number: context.payload.issue.number,
-              body: `:x: Failed to split pull request. See https://github.com/${context.issue.owner}/${context.issue.repo}/actions/runs/${context.runId} for detail.` :x:
+              body: `:x: ERROR: Failed to split pull request. See https://github.com/${context.issue.owner}/${context.issue.repo}/actions/runs/${context.runId} for detail.`
             });
