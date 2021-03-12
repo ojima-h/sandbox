@@ -25,7 +25,7 @@ jobs:
           token: ${{ github.token }}
           
       - name: Report success
-        if: ${{ success() }}
+        if: ${{ always() }}
         uses: actions/github-script@v3
         with:
           script: |
@@ -33,20 +33,9 @@ jobs:
               owner: context.issue.owner,
               repo: context.issue.repo,
               comment_id: context.payload.comment.id,
-              content: "rocket"
+              content: ${{ success() }} ? "rocket" : "confused"
             });
-      - name: Report failure
-        if: ${{ failure() }}
-        uses: actions/github-script@v3
-        with:
-          script: |
-            github.reactions.createForIssueComment({
-              owner: context.issue.owner,
-              repo: context.issue.repo,
-              comment_id: context.payload.comment.id,
-              content: "confused"
-            });
-            github.issues.createComment({
+            ${{ failure() }} && github.issues.createComment({
               owner: context.issue.owner,
               repo: context.issue.repo,
               issue_number: context.payload.issue.number,
