@@ -17,7 +17,9 @@ jobs:
         with:
           pull-number: ${{ github.event.issue.number }}
           file-pattern: "dir/**"
-          branch-suffix: "-split"
+          branch-suffix: "-split"          
           commit-message: "Split PR #${{ github.event.issue.number }}"
+          commit-user: ${{ github.event.comment.user.login }}
+          commit-email: ${{ github.event.comment.user.id }}+${{ github.event.comment.user.login }}@users.noreply.github.com
           title-prefix: "split-pr: "
           token: ${{ github.token }}
