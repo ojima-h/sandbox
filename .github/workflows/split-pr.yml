@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Run a one-line script
-        uses: ojima-h/split-pr@main
+        uses: mitene/split-pr@main
         with:
           pull-number: ${{ github.event.issue.number }}
           file-pattern: "dir/**"
@@ -23,33 +23,3 @@ jobs:
           commit-email: ${{ github.event.sender.id }}+${{ github.event.sender.login }}@users.noreply.github.com
           title-prefix: "split-pr: "
           token: ${{ github.token }}
-          
-
-      - name: Report success
-        if: ${{ success() }}
-        uses: actions/github-script@v3
-        with:
-          script: |
-            github.reactions.createForIssueComment({
-              owner: context.issue.owner,
-              repo: context.issue.repo,
-              comment_id: context.payload.comment.id,
-              content: "rocket"
-            });
-      - name: Report failure
-        if: ${{ failure() }}
-        uses: actions/github-script@v3
-        with:
-          script: |
-            github.reactions.createForIssueComment({
-              owner: context.issue.owner,
-              repo: context.issue.repo,
-              comment_id: context.payload.comment.id,
-              content: "confused"
-            });
-            github.issues.createComment({
-              owner: context.issue.owner,
-              repo: context.issue.repo,
-              issue_number: context.payload.issue.number,
-              body: `:x:**ERROR**: Failed to split pull request. See https://github.com/${context.issue.owner}/${context.issue.repo}/actions/runs/${context.runId} for detail.`
-            });
