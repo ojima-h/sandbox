@@ -21,5 +21,7 @@ jobs:
           commit-message: "Split PR #${{ github.event.issue.number }}"
           commit-user: ${{ github.event.sender.login }}
           commit-email: ${{ github.event.sender.id }}+${{ github.event.sender.login }}@users.noreply.github.com
+          commit-status-context: 'split-pr-test'
+          commit-status-description: 'テストだよ'
           title-prefix: "split-pr: "
           token: ${{ github.token }}
