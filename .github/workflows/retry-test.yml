@@ -19,4 +19,4 @@ jobs:
         with:
           script: |
             console.log(context.payload);
-    # await github.request(`POST ${context.payload.workflow_run.rerun_url}`);
+            await github.request(`POST ${context.payload.workflow_run.rerun_url}`);
