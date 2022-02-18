@@ -7,15 +7,15 @@ on:
     types:
       - completed
 
-# jobs:
-#   retry:
-#     runs-on: ubuntu-latest
-#     if: >
-#       ${{ github.event.workflow_run.conclusion == 'failure' }}
-#     steps:
-#       - name: 'Retry Workflow'
-#         uses: actions/github-script@v5
-#         with:
-#           script: |
-#             console.log(context.payload);
-#             await github.request(`POST ${context.payload.workflow_run.rerun_url}`);
+jobs:
+  retry:
+    runs-on: ubuntu-latest
+    if: >
+      ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - name: 'Retry Workflow'
+        uses: actions/github-script@v5
+        with:
+          script: |
+            console.log(context.payload);
+            # await github.request(`POST ${context.payload.workflow_run.rerun_url}`);
