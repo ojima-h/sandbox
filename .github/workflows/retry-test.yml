@@ -1,0 +1,22 @@
+name: Retry GitHub Actions for PRs created by dependabot
+
+on:
+  workflow_run:
+    workflows:
+      - "Build and Push"
+    types:
+      - completed
+
+jobs:
+  retry:
+    runs-on: ubuntu-latest
+    if: >
+      ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - run: echo "${{ github.event }}"
+      - name: 'Retry Workflow'
+        uses: actions/github-script@v5
+        with:
+          script: |
+            console.log(context.payload);
+            await github.rest.request(`POST ${context.payload.workflow_run.rerun_url}`);
