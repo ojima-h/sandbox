@@ -1,9 +1,9 @@
-name: Retry GitHub Actions for PRs created by dependabot
+name: Retry
 
 on:
   workflow_run:
     workflows:
-      - "Build and Push"
+      - "CI"
     types:
       - completed
 
