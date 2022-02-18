@@ -4,14 +4,12 @@ on:
   workflow_run:
     workflows:
       - "CI"
-    types:
-      - completed
+    types: ["completed"]
 
 jobs:
   retry:
     runs-on: ubuntu-latest
-    if: >
-      ${{ github.event.workflow_run.conclusion == 'failure' }}
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
     steps:
       - name: 'Retry Workflow'
         uses: actions/github-script@v5
