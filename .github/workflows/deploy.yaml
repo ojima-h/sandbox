@@ -22,7 +22,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: |
-          echo "# OK" >> $GITHUB_SUMMARY
+          echo "# OK" >> $GITHUB_STEP_SUMMARY
 
   # This workflow contains a single job called "build"
   apply:
