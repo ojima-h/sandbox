@@ -41,4 +41,3 @@ jobs:
   build_call:
     uses: ./.github/workflows/blank-2.yml
 
-    environment: test
