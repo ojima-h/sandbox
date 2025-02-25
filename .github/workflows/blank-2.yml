@@ -40,9 +40,13 @@ jobs:
       - uses: actions/github-script@v7
         with:
           script: |
+            console.log('-');
             console.log(await exec.exec('ls', []));
+            console.log('--');
             console.log(await exec.exec('lss', [], {ignoreReturnCode: true}));
-            console.log(await exec.exec('lss', []));
+            console.log('---');
+            console.log(await exec.exec('lsss', []));
+            console.log('----');
 
   build_1:
     # The type of runner that the job will run on
