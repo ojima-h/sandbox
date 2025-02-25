@@ -41,7 +41,7 @@ jobs:
         with:
           script: |
             console.log(exec.exec('ls', []));
-            console.log(exec.exec('lss', [], {ignoreReturnCode: true));
+            console.log(exec.exec('lss', [], {ignoreReturnCode: true}));
             console.log(exec.exec('lss', []));
 
   build_1:
