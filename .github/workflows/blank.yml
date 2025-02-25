@@ -1,6 +1,7 @@
 # This is a basic workflow to help you get started with Actions
 
 name: CI
+run-name: CI ${{ github.ref_name }}
 
 # Controls when the action will run.
 on:
@@ -37,3 +38,7 @@ jobs:
           echo ${{ github.sha }}
           echo ${{ github.ref }}
           echo ${{ env.GITHUB_SHA }}
+
+  build_call:
+    uses: ./.github/workflows/blank-2.yml
+
